@@ -32,9 +32,9 @@
         <div class="flex flex-col">
           <!-- hidden form -->
           <form
-            class="mb-7 grid h-full grid-cols-2 items-center gap-x-10 gap-y-3 rounded-md bg-dark--2 px-11 py-6 transition-all duration-500"
+            class="mb-7 grid h-full items-center gap-x-10 gap-y-3 rounded-md bg-dark--2 px-11 py-6 transition-all duration-500 md:grid-cols-2"
           >
-            <div class="flex items-center">
+            <div class="xs:flex-row flex flex-col items-center">
               <label
                 for="select"
                 class="basis-[100%] text-[0.8rem] font-semibold"
@@ -50,7 +50,7 @@
               </select>
             </div>
 
-            <div class="flex items-center">
+            <div class="xs:flex-row flex flex-col items-center">
               <label for="" class="basis-[100%] text-[0.8rem] font-semibold"
                 >Distance</label
               >
@@ -61,7 +61,7 @@
               />
             </div>
 
-            <div class="flex items-center">
+            <div class="xs:flex-row flex flex-col items-center">
               <label for="" class="basis-[100%] text-[0.8rem] font-semibold"
                 >Duration</label
               >
@@ -72,7 +72,7 @@
               />
             </div>
 
-            <div class="flex items-center">
+            <div class="xs:flex-row flex flex-col items-center">
               <label for="" class="basis-[100%] text-[0.8rem] font-semibold"
                 >Cadence</label
               >
@@ -83,7 +83,7 @@
               />
             </div>
 
-            <div class="flex hidden items-center">
+            <div class="xs:flex-row flex hidden flex-col items-center">
               <label for="" class="basis-[100%] text-[0.8rem] font-semibold"
                 >Elven Gain</label
               >
@@ -97,12 +97,12 @@
 
           <!-- For Runing -->
           <div
-            class="mb-7 grid cursor-pointer grid-cols-4 flex-col gap-x-6 gap-y-3 rounded-md border-l-[5px] border-brand--2 bg-dark--2 px-6 py-6"
+            class="mb-7 grid cursor-pointer flex-col gap-x-6 gap-y-3 rounded-md border-l-[5px] border-brand--2 bg-dark--2 px-6 py-6 md:grid-cols-4"
           >
             <h2 class="col-start-1 col-end-[-1] text-[1.2rem] font-semibold">
               Running on December 21
             </h2>
-            <div class="flex gap-x-4">
+            <div class="flex flex-wrap gap-x-4 md:flex-nowrap">
               <div class="flex items-center">
                 <p>🏃‍♂️</p>
                 <span class="mr-1 text-[0.9rem]">343 </span>
@@ -143,12 +143,12 @@
 
           <!-- For cycling -->
           <div
-            class="mb-7 grid cursor-pointer grid-cols-4 flex-col gap-x-6 gap-y-3 rounded-md border-l-[5px] border-brand--1 bg-dark--2 px-6 py-6"
+            class="mb-7 grid cursor-pointer flex-col gap-x-6 gap-y-3 rounded-md border-l-[5px] border-brand--1 bg-dark--2 px-6 py-6 md:grid-cols-4"
           >
             <h2 class="col-start-1 col-end-[-1] text-[1.2rem] font-semibold">
               Running on December 21
             </h2>
-            <div class="flex gap-x-4">
+            <div class="flex flex-wrap gap-x-4 md:flex-nowrap">
               <div class="flex items-center">
                 <p class="mr-[0.1rem]">🚴‍♀️</p>
                 <span class="mr-1 text-[0.9rem]">343 </span>
@@ -189,18 +189,16 @@
 
           <!-- popups -->
           <div
-            class="relative rounded-md border-l-[5px] border-brand--1 bg-dark--1 text-light--2"
+            class="relative h-[3rem] w-[15rem] rounded-md border-l-[5px] border-brand--1 bg-dark--1 text-light--2"
           >
-            <h4
-              class="mx-[19px] my-[13px] w-[188px] text-[1.5rem] leading-[1.4]"
-            >
+            <h4 class="px-[0.3rem] py-[10px] text-center text-[0.9rem]">
               🚴‍♀️ Cycling on December 21
             </h4>
 
             <div></div>
             <a
               href="#"
-              class="absolute right-0 top-0 h-[14px] w-[18px] text-[#c3c3c3] no-underline"
+              class="absolute right-0 top-0 h-[14px] w-[18px] pr-[4px] pt-[4px] font-bold text-[#c3c3c3] no-underline"
               >x</a
             >
           </div>

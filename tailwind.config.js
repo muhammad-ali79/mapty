@@ -12,6 +12,10 @@ module.exports = {
         "light--2": "#ececec",
         "light--3": "rgb(214, 222, 224)",
       },
+
+      screens: {
+        xs: "321px",
+      },
     },
   },
   plugins: [],
