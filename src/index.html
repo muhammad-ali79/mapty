@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mapty || Map yout workouts</title>
+    <!-- Linking -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="shortcut icon" href="images/icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="output.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body class="font-['Manrope']">
+    <main
+      class="flex w-full overflow-x-hidden font-medium leading-[1.6] text-light--2"
+    >
+      <!-- workouts Container -->
+      <div class="flex h-[100vh] w-1/2 flex-col bg-dark--1 px-10 py-4">
+        <!-- logo -->
+        <img
+          src="images/logo.png"
+          alt="logo"
+          class="mb-16 h-[3.2rem] self-center"
+        />
+        <!-- Forms Continer -->
+        <div class="flex flex-col">
+          <!-- hidden form -->
+          <form
+            class="mb-7 grid h-full grid-cols-2 items-center gap-x-10 gap-y-3 rounded-md bg-dark--2 px-11 py-6 transition-all duration-500"
+          >
+            <div class="flex items-center">
+              <label
+                for="select"
+                class="basis-[100%] text-[0.8rem] font-semibold"
+                >Type</label
+              >
+              <select
+                name=""
+                id="select"
+                class="w-48 rounded bg-light--3 px-[0.3rem] py-[0.3rem] text-[0.8rem] text-black outline-none transition-all duration-[0.2s]"
+              >
+                <option value="running">Running</option>
+                <option value="cycling">Cycling</option>
+              </select>
+            </div>
+
+            <div class="flex items-center">
+              <label for="" class="basis-[100%] text-[0.8rem] font-semibold"
+                >Distance</label
+              >
+              <input
+                placeholder="Km"
+                type="text"
+                class="w-full rounded bg-light--3 px-[1.1rem] py-[0.3rem] text-[0.8rem] text-black outline-none transition-all duration-[0.2s]"
+              />
+            </div>
+
+            <div class="flex items-center">
+              <label for="" class="basis-[100%] text-[0.8rem] font-semibold"
+                >Duration</label
+              >
+              <input
+                placeholder="min"
+                type="text"
+                class="w-full rounded bg-light--3 px-[1.1rem] py-[0.3rem] text-[0.8rem] text-black outline-none transition-all duration-[0.2s]"
+              />
+            </div>
+
+            <div class="flex items-center">
+              <label for="" class="basis-[100%] text-[0.8rem] font-semibold"
+                >Cadence</label
+              >
+              <input
+                placeholder="step/min"
+                type="text"
+                class="w-full rounded bg-light--3 px-[1.1rem] py-[0.3rem] text-[0.7rem] text-black outline-none transition-all duration-[0.2s]"
+              />
+            </div>
+
+            <div class="flex hidden items-center">
+              <label for="" class="basis-[100%] text-[0.8rem] font-semibold"
+                >Elven Gain</label
+              >
+              <input
+                placeholder="meters"
+                type="text"
+                class="w-full rounded bg-light--3 px-[1.1rem] py-[0.3rem] text-[0.8rem] text-black outline-none transition-all duration-[0.2s]"
+              />
+            </div>
+          </form>
+
+          <!-- For Runing -->
+          <div
+            class="mb-7 grid cursor-pointer grid-cols-4 flex-col gap-x-6 gap-y-3 rounded-md border-l-[5px] border-brand--2 bg-dark--2 px-6 py-6"
+          >
+            <h2 class="col-start-1 col-end-[-1] text-[1.2rem] font-semibold">
+              Running on December 21
+            </h2>
+            <div class="flex gap-x-4">
+              <div class="flex items-center">
+                <p>🏃‍♂️</p>
+                <span class="mr-1 text-[0.9rem]">343 </span>
+                <span
+                  class="text-[0.8rem] font-extrabold uppercase text-light--1"
+                  >km
+                </span>
+              </div>
+
+              <div class="flex items-center">
+                <p class="mr-[0.1rem]">⏱</p>
+                <span class="mr-1 text-[0.9rem]">343</span>
+                <span
+                  class="text-[0.8rem] font-extrabold uppercase text-light--1"
+                  >MIN</span
+                >
+              </div>
+
+              <div class="flex items-center">
+                <p class="mr-[0.1rem]">⚡️</p>
+                <span class="mr-1 text-[0.9rem]">1.0 </span>
+                <span
+                  class="text-[0.8rem] font-extrabold uppercase text-light--1"
+                  >MIN/KM</span
+                >
+              </div>
+
+              <div class="flex items-center">
+                <p class="mr-[0.1rem]">🦶🏼</p>
+                <span class="mr-1 text-[0.9rem]">34 </span>
+                <span
+                  class="text-[0.8rem] font-extrabold uppercase text-light--1"
+                  >SPM</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- For cycling -->
+          <div
+            class="mb-7 grid cursor-pointer grid-cols-4 flex-col gap-x-6 gap-y-3 rounded-md border-l-[5px] border-brand--1 bg-dark--2 px-6 py-6"
+          >
+            <h2 class="col-start-1 col-end-[-1] text-[1.2rem] font-semibold">
+              Running on December 21
+            </h2>
+            <div class="flex gap-x-4">
+              <div class="flex items-center">
+                <p class="mr-[0.1rem]">🚴‍♀️</p>
+                <span class="mr-1 text-[0.9rem]">343 </span>
+                <span
+                  class="text-[0.8rem] font-extrabold uppercase text-light--1"
+                  >km
+                </span>
+              </div>
+
+              <div class="flex items-center">
+                <p class="mr-[0.1rem]">⏱</p>
+                <span class="mr-1 text-[0.9rem]">343</span>
+                <span
+                  class="text-[0.8rem] font-extrabold uppercase text-light--1"
+                  >MIN</span
+                >
+              </div>
+
+              <div class="flex items-center">
+                <p class="mr-[0.1rem]">⚡️</p>
+                <span class="mr-1 text-[0.9rem]">1.0 </span>
+                <span
+                  class="text-[0.8rem] font-extrabold uppercase text-light--1"
+                  >MIN/KM</span
+                >
+              </div>
+
+              <div class="flex items-center">
+                <p class="mr-[0.1rem]">⛰</p>
+                <span class="mr-1 text-[0.9rem]">34 </span>
+                <span
+                  class="text-[0.8rem] font-extrabold uppercase text-light--1"
+                  >m</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Map container -->
+      <div></div>
+    </main>
+  </body>
+</html>

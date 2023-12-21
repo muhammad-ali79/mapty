@@ -1,0 +1,21 @@
+# Ignore Node.js dependencies
+node_modules/
+
+# Ignore development-specific files
+yarn.lock
+webpack.config.js
+.env
+
+# Ignore editor/IDE files
+.vscode/
+.idea/
+.editorconfig
+
+# Ignore temporary files
+.DS_Store
+Thumbs.db
+
+# Exclude specific files but include 'dist/'
+# (Adjust these according to your project structure)
+dist/*.map    # Exclude source map files if generated in 'dist/'
+!dist/*.css   # Include CSS files from 'dist/'
