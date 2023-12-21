@@ -16,10 +16,12 @@
   </head>
   <body class="font-['Manrope']">
     <main
-      class="flex w-full overflow-x-hidden font-medium leading-[1.6] text-light--2"
+      class="flex w-full flex-col-reverse overflow-x-hidden font-medium leading-[1.6] text-light--2 lg:flex-row"
     >
       <!-- workouts Container -->
-      <div class="flex h-[100vh] w-1/2 flex-col bg-dark--1 px-10 py-4">
+      <div
+        class="flex h-[100vh] w-full flex-col bg-dark--1 px-10 py-4 lg:w-1/2"
+      >
         <!-- logo -->
         <img
           src="images/logo.png"
@@ -41,7 +43,7 @@
               <select
                 name=""
                 id="select"
-                class="w-48 rounded bg-light--3 px-[0.3rem] py-[0.3rem] text-[0.8rem] text-black outline-none transition-all duration-[0.2s]"
+                class="w-full rounded bg-light--3 px-[0.3rem] py-[0.3rem] text-[0.8rem] text-black outline-none transition-all duration-[0.2s]"
               >
                 <option value="running">Running</option>
                 <option value="cycling">Cycling</option>
@@ -184,11 +186,29 @@
               </div>
             </div>
           </div>
+
+          <!-- popups -->
+          <div
+            class="relative rounded-md border-l-[5px] border-brand--1 bg-dark--1 text-light--2"
+          >
+            <h4
+              class="mx-[19px] my-[13px] w-[188px] text-[1.5rem] leading-[1.4]"
+            >
+              🚴‍♀️ Cycling on December 21
+            </h4>
+
+            <div></div>
+            <a
+              href="#"
+              class="absolute right-0 top-0 h-[14px] w-[18px] text-[#c3c3c3] no-underline"
+              >x</a
+            >
+          </div>
         </div>
       </div>
 
       <!-- Map container -->
-      <div></div>
+      <div class="h-[50vh] w-full bg-green-700 lg:w-1/2">Text Node</div>
     </main>
   </body>
 </html>
