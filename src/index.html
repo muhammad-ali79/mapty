@@ -9,10 +9,21 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
-
     <link rel="shortcut icon" href="images/icon.png" type="image/x-icon" />
     <link rel="stylesheet" href="output.css" />
     <script src="script.js" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
   </head>
   <body class="font-['Manrope']">
     <main
@@ -34,7 +45,7 @@
           <form
             class="mb-7 grid h-full items-center gap-x-10 gap-y-3 rounded-md bg-dark--2 px-11 py-6 transition-all duration-500 md:grid-cols-2"
           >
-            <div class="xs:flex-row flex flex-col items-center">
+            <div class="flex flex-col items-center xs:flex-row">
               <label
                 for="select"
                 class="basis-[100%] text-[0.8rem] font-semibold"
@@ -50,7 +61,7 @@
               </select>
             </div>
 
-            <div class="xs:flex-row flex flex-col items-center">
+            <div class="flex flex-col items-center xs:flex-row">
               <label for="" class="basis-[100%] text-[0.8rem] font-semibold"
                 >Distance</label
               >
@@ -61,7 +72,7 @@
               />
             </div>
 
-            <div class="xs:flex-row flex flex-col items-center">
+            <div class="flex flex-col items-center xs:flex-row">
               <label for="" class="basis-[100%] text-[0.8rem] font-semibold"
                 >Duration</label
               >
@@ -72,7 +83,7 @@
               />
             </div>
 
-            <div class="xs:flex-row flex flex-col items-center">
+            <div class="flex flex-col items-center xs:flex-row">
               <label for="" class="basis-[100%] text-[0.8rem] font-semibold"
                 >Cadence</label
               >
@@ -83,7 +94,7 @@
               />
             </div>
 
-            <div class="xs:flex-row flex hidden flex-col items-center">
+            <div class="flex hidden flex-col items-center xs:flex-row">
               <label for="" class="basis-[100%] text-[0.8rem] font-semibold"
                 >Elven Gain</label
               >
@@ -206,7 +217,7 @@
       </div>
 
       <!-- Map container -->
-      <div class="h-[50vh] w-full bg-green-700 lg:w-1/2">Text Node</div>
+      <div class="map h-[50vh] w-full bg-green-700 lg:h-[100vh] lg:w-1/2"></div>
     </main>
   </body>
 </html>

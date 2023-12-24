@@ -1,25 +1,29 @@
-/*
-Features:
-zoom
-drag
-show marker
-*/
-
-// get the user location using the geolocation Api
-
-let lat, lon;
+"use strict";
 
 const getLocation = () => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
-      lat = position.coords.latitude;
-      lon = position.coords.longitude;
+      let lat = position.coords.latitude;
+      let lon = position.coords.longitude;
+
+      console.log(lat, lon);
+
+      // Setting the map
+      const mapDiv = document.querySelector(".map");
+
+      let map = L.map(mapDiv).setView([lat, lon], 13);
+
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution:
+          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      }).addTo(map);
     });
   } else {
     prompt("could not get your location");
   }
 };
 
-window.onload = () => {
+document.addEventListener("DOMContentLoaded", () => {
   getLocation();
-};
+});

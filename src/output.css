@@ -930,6 +930,10 @@ video {
 }
 
 @media (min-width: 1024px) {
+  .lg\:h-\[100vh\] {
+    height: 100vh;
+  }
+
   .lg\:w-1\/2 {
     width: 50%;
   }
