@@ -1,5 +1,26 @@
 "use strict";
 let map;
+const workoutContainer = document.querySelector(".workout-container");
+
+class workout {
+  constructor(lat, lon, distance, min, speed) {
+    this.lat = lat;
+    this.lon = lon;
+    this.distance = distance;
+    this.min = min;
+    this.speed = speed;
+  }
+
+  static onMapClick(e) {
+    const inputForm = document.querySelector(".input-form");
+    inputForm.classList.remove("hidden");
+
+    this.lat = e.lat;
+    this.lon = e.lon;
+  }
+
+  onInputEnter() {}
+}
 
 const getLocation = () => {
   if (navigator.geolocation) {
@@ -15,6 +36,16 @@ const getLocation = () => {
         attribution:
           '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }).addTo(map);
+
+      map.on("click", (e) => {
+        workout.onMapClick(e);
+      });
+
+      workoutContainer.addEventListener("change", (e) => {
+        if (e.target.classList.contains("dropdown")) {
+          console.log("some");
+        }
+      });
     });
   } else {
     prompt("could not get your location");
