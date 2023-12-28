@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+duration-opacity-transform {
+  transition-property: opacity, transform;
+  transition-duration: 0.5s, 1ms;
+}

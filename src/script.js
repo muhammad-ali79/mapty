@@ -1,6 +1,7 @@
 "use strict";
-let map;
+
 const workoutContainer = document.querySelector(".workout-container");
+const inputForm = document.querySelector(".input-form");
 
 class workout {
   constructor(lat, lon, distance, min, speed) {
@@ -12,8 +13,9 @@ class workout {
   }
 
   static onMapClick(e) {
-    const inputForm = document.querySelector(".input-form");
-    inputForm.classList.remove("hidden");
+    inputForm.classList.remove("opacity-0", "h-0", "-translate-y-[30rem]");
+
+    inputForm.classList.add("mb-7", "py-6");
 
     this.lat = e.lat;
     this.lon = e.lon;
@@ -29,7 +31,7 @@ const getLocation = () => {
       let lon = position.coords.longitude;
 
       // Setting the map
-      map = L.map("map").setView([lat, lon], 13);
+      let map = L.map("map").setView([lat, lon], 13);
 
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
@@ -39,11 +41,24 @@ const getLocation = () => {
 
       map.on("click", (e) => {
         workout.onMapClick(e);
+
+        console.log(e.latlng);
       });
 
-      workoutContainer.addEventListener("change", (e) => {
+      // To show Form
+      workoutContainer.addEventListener("click", (e) => {
         if (e.target.classList.contains("dropdown")) {
-          console.log("some");
+          const dropdown = document.querySelector(".dropdown");
+          const elvenGain = inputForm.querySelector(".elven-gain");
+          const cadence = inputForm.querySelector(".cadence");
+
+          if (dropdown.value === "cycling") {
+            elvenGain.classList.remove("hidden");
+            cadence.classList.add("hidden");
+          } else {
+            elvenGain.classList.add("hidden");
+            cadence.classList.remove("hidden");
+          }
         }
       });
     });
