@@ -31,9 +31,9 @@
     <main
       class="flex w-full flex-col-reverse overflow-x-hidden font-medium leading-[1.6] text-light--2 lg:flex-row"
     >
-      <!-- workouts Container -->
+      <!--  Container -->
       <div
-        class="workout-container flex h-[100vh] w-full flex-col bg-dark--1 px-10 py-4 lg:w-1/2"
+        class="container flex h-[100vh] w-full flex-col bg-dark--1 px-10 py-4 lg:w-1/2"
       >
         <!-- logo -->
         <img
@@ -46,7 +46,7 @@
         <div class="flex flex-col">
           <!-- hidden form -->
           <form
-            class="input-form duration-opacity-tranform grid h-0 -translate-y-[30rem] items-center gap-x-10 gap-y-3 rounded-md bg-dark--2 px-11 opacity-0 transition-all ease-linear md:grid-cols-2"
+            class="input-form duration-opacity-tranform grid h-0 -translate-y-[2rem] items-center gap-x-10 gap-y-3 rounded-md bg-dark--2 px-11 opacity-0 transition-all ease-linear focus:bg-red-400 md:grid-cols-2"
           >
             <div class="flex flex-col items-center xs:flex-row">
               <label
@@ -57,7 +57,7 @@
               <select
                 name=""
                 id="select"
-                class="dropdown w-full rounded bg-light--3 px-[0.3rem] py-[0.3rem] text-[0.8rem] text-black outline-none transition-all duration-[0.2s]"
+                class="dropdown w-full rounded bg-light--3 px-[0.3rem] py-[0.3rem] text-[0.8rem] text-black outline-none transition-all duration-[0.2s] focus:bg-[#181a1b]"
               >
                 <option value="running">Running</option>
                 <option value="cycling">Cycling</option>
@@ -71,7 +71,8 @@
               <input
                 placeholder="Km"
                 type="text"
-                class="w-full rounded bg-light--3 px-[1.1rem] py-[0.3rem] text-[0.8rem] text-black outline-none transition-all duration-[0.2s]"
+                id="input-field1"
+                class="input-field w-full rounded bg-light--3 px-[1.1rem] py-[0.3rem] text-[0.8rem] text-black outline-none transition-all duration-[0.2s] focus:bg-[#181a1b]"
               />
             </div>
 
@@ -82,7 +83,7 @@
               <input
                 placeholder="min"
                 type="text"
-                class="w-full rounded bg-light--3 px-[1.1rem] py-[0.3rem] text-[0.8rem] text-black outline-none transition-all duration-[0.2s]"
+                class="input-field w-full rounded bg-light--3 px-[1.1rem] py-[0.3rem] text-[0.8rem] text-black outline-none transition-all duration-[0.2s] focus:bg-[#181a1b]"
               />
             </div>
 
@@ -93,7 +94,7 @@
               <input
                 placeholder="step/min"
                 type="text"
-                class="w-full rounded bg-light--3 px-[1.1rem] py-[0.3rem] text-[0.7rem] text-black outline-none transition-all duration-[0.2s]"
+                class="cadence-input input-field w-full rounded bg-light--3 px-[1.1rem] py-[0.3rem] text-[0.7rem] text-black outline-none transition-all duration-[0.2s] focus:bg-[#181a1b]"
               />
             </div>
 
@@ -106,118 +107,12 @@
               <input
                 placeholder="meters"
                 type="text"
-                class="w-full rounded bg-light--3 px-[1.1rem] py-[0.3rem] text-[0.8rem] text-black outline-none transition-all duration-[0.2s]"
+                class="elven-input input-field w-full rounded bg-light--3 px-[1.1rem] py-[0.3rem] text-[0.8rem] text-black outline-none transition-all duration-[0.2s] focus:bg-[#181a1b]"
               />
             </div>
           </form>
-
-          <!-- For Runing -->
-          <div
-            class="mb-7 grid cursor-pointer flex-col gap-x-6 gap-y-3 rounded-md border-l-[5px] border-brand--2 bg-dark--2 px-6 py-6 md:grid-cols-4"
-          >
-            <h2 class="col-start-1 col-end-[-1] text-[1.2rem] font-semibold">
-              Running on December 21
-            </h2>
-            <div class="flex flex-wrap gap-x-4 md:flex-nowrap">
-              <div class="flex items-center">
-                <p>🏃‍♂️</p>
-                <span class="mr-1 text-[0.9rem]">343 </span>
-                <span
-                  class="text-[0.8rem] font-extrabold uppercase text-light--1"
-                  >km
-                </span>
-              </div>
-
-              <div class="flex items-center">
-                <p class="mr-[0.1rem]">⏱</p>
-                <span class="mr-1 text-[0.9rem]">343</span>
-                <span
-                  class="text-[0.8rem] font-extrabold uppercase text-light--1"
-                  >MIN</span
-                >
-              </div>
-
-              <div class="flex items-center">
-                <p class="mr-[0.1rem]">⚡️</p>
-                <span class="mr-1 text-[0.9rem]">1.0 </span>
-                <span
-                  class="text-[0.8rem] font-extrabold uppercase text-light--1"
-                  >MIN/KM</span
-                >
-              </div>
-
-              <div class="flex items-center">
-                <p class="mr-[0.1rem]">🦶🏼</p>
-                <span class="mr-1 text-[0.9rem]">34 </span>
-                <span
-                  class="text-[0.8rem] font-extrabold uppercase text-light--1"
-                  >SPM</span
-                >
-              </div>
-            </div>
-          </div>
-
-          <!-- For cycling -->
-          <div
-            class="mb-7 grid cursor-pointer flex-col gap-x-6 gap-y-3 rounded-md border-l-[5px] border-brand--1 bg-dark--2 px-6 py-6 md:grid-cols-4"
-          >
-            <h2 class="col-start-1 col-end-[-1] text-[1.2rem] font-semibold">
-              Running on December 21
-            </h2>
-            <div class="flex flex-wrap gap-x-4 md:flex-nowrap">
-              <div class="flex items-center">
-                <p class="mr-[0.1rem]">🚴‍♀️</p>
-                <span class="mr-1 text-[0.9rem]">343 </span>
-                <span
-                  class="text-[0.8rem] font-extrabold uppercase text-light--1"
-                  >km
-                </span>
-              </div>
-
-              <div class="flex items-center">
-                <p class="mr-[0.1rem]">⏱</p>
-                <span class="mr-1 text-[0.9rem]">343</span>
-                <span
-                  class="text-[0.8rem] font-extrabold uppercase text-light--1"
-                  >MIN</span
-                >
-              </div>
-
-              <div class="flex items-center">
-                <p class="mr-[0.1rem]">⚡️</p>
-                <span class="mr-1 text-[0.9rem]">1.0 </span>
-                <span
-                  class="text-[0.8rem] font-extrabold uppercase text-light--1"
-                  >MIN/KM</span
-                >
-              </div>
-
-              <div class="flex items-center">
-                <p class="mr-[0.1rem]">⛰</p>
-                <span class="mr-1 text-[0.9rem]">34 </span>
-                <span
-                  class="text-[0.8rem] font-extrabold uppercase text-light--1"
-                  >m</span
-                >
-              </div>
-            </div>
-          </div>
-
-          <!-- popups -->
-          <!-- <div
-            class="relative h-[3rem] w-[15rem] rounded-md border-l-[5px] border-brand--1 bg-dark--1 text-light--2"
-          >
-            <h4 class="px-[0.3rem] py-[10px] text-center text-[0.9rem]">
-              🚴‍♀️ Cycling on December 21
-            </h4>
-
-            <div></div>
-            <a
-              href="#"
-              class="absolute right-0 top-0 h-[14px] w-[18px] pr-[4px] pt-[4px] font-bold text-[#c3c3c3] no-underline"
-              >x</a
-            >
-          </div> -->
+          <!-- Workouts Container-->
+          <div class="workouts-container"></div>
         </div>
       </div>
 
