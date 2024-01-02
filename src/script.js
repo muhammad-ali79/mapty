@@ -1,22 +1,86 @@
-"use strict";
-
-const Container = document.querySelector(".container");
+const Container = document.querySelector(".container-box");
 const inputForm = document.querySelector(".input-form");
 const workoutsContainer = document.querySelector(".workouts-container");
+let latlng;
 let map;
 let workouts = [];
+let workoutId;
 
-const makeWorkouts = function (date, type, distance, duration, exercise) {
-  console.log(date);
-  const day = date.getDate();
-  const monthName = date.toLocaleString("default", { month: "long" });
+const onMapClick = function () {
+  inputForm.classList.remove("opacity-0", "h-0", "-translate-y-[97px]");
+  inputForm.classList.add("mb-7", "py-6");
+  document.getElementById("input-field1").focus();
+};
+
+const showError = (error) => {
+  const errorMessages = {
+    [error.PERMISSION_DENIED]: "User denied the request for Geolocation.",
+    [error.POSITION_UNAVAILABLE]: "Location information is unavailable.",
+    [error.TIMEOUT]: "The request to get user location timed out.",
+    [error.UNKNOWN_ERROR]: "An unknown error occurred.",
+  };
+
+  alert(errorMessages[error.code] || "An error occurred.");
+};
+
+// This wil add marker and popup
+const addMarker = function (lat, lng, desc) {
+  const marker = L.marker([lat, lng]).addTo(map);
+
+  const iconDesc = desc.includes("running")
+    ? `${desc.padStart(desc.length + 4, "🏃‍♂️  ")}`
+    : `${desc.padStart(desc.length + 4, "🚴‍♀️  ")}`;
+
+  marker.bindPopup(iconDesc).openPopup();
+};
+
+const getLocation = () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        let userLat = position.coords.latitude;
+        let userLon = position.coords.longitude;
+
+        // Setting the inital map based on user location map
+        map = L.map("map").setView([userLat, userLon], 13);
+
+        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution:
+            '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        }).addTo(map);
+
+        map.on("click", (e) => {
+          onMapClick(e);
+          latlng = e.latlng;
+          console.log(e.latlng);
+        });
+
+        // For Dom Content Loaded
+        workouts.forEach((w) => {
+          const [lat, lng] = w.coordinates;
+          addMarker(lat, lng, w.description);
+        });
+      },
+      (error) => showError(error),
+    );
+  }
+};
+
+const makeWorkouts = function (date, type, distance, duration, exercise, id) {
+  const formattedDate = date.toLocaleString("default", {
+    month: "long",
+    day: "numeric",
+  });
+
+  const workoutType = type === "running" ? "Running" : "Cycling";
 
   const html = `
-  <div class="mb-7 grid cursor-pointer flex-col gap-x-6 gap-y-3 rounded-md border-l-[5px] ${
+  <div class="workout-details mb-7 grid cursor-pointer flex-col gap-x-6 gap-y-3 rounded-md border-l-[5px] ${
     type === "running" ? "border-brand--2" : "border-brand--1"
   }  bg-dark--2 px-6 py-6 md:grid-cols-4">
     <h2 class="col-start-1 col-end-[-1] text-[1.2rem] font-semibold">
-      ${type === "running" ? "Running" : "Cycling"} on ${monthName} ${day}
+      ${workoutType} on ${formattedDate}
     </h2>
     <div class="flex flex-wrap gap-x-4 md:flex-nowrap">
       <div class="flex items-center">
@@ -52,179 +116,128 @@ const makeWorkouts = function (date, type, distance, duration, exercise) {
     </div>
   </div>
 `;
-
   const div = document.createElement("div");
   div.innerHTML = html;
+
+  div.dataset.id = `${id}`;
   workoutsContainer.prepend(div);
 };
 
-class workout {
-  constructor(lat, lng, distance, duration, speed) {
-    this.lat = lat;
-    this.lng = lng;
-    this.distance = distance;
-    this.duration = duration;
-    this.speed = speed;
-  }
-
-  static onMapClick(e) {
-    inputForm.classList.remove("opacity-0", "h-0", "-translate-y-[2rem]");
-    inputForm.classList.add("mb-7", "py-6");
-    document.getElementById("input-field1").focus();
-
-    const { lat, lng } = e.latlng;
-    this.lat = lat;
-    this.lng = lng;
-  }
-
-  onInputEnter() {}
-}
-
-const getLocation = () => {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((position) => {
-      let lat = position.coords.latitude;
-      let lon = position.coords.longitude;
-
-      // Setting the inital map based on user location map
-      map = L.map("map").setView([lat, lon], 13);
-
-      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        maxZoom: 19,
-        attribution:
-          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      }).addTo(map);
-
-      map.on("click", (e) => {
-        workout.onMapClick(e);
-        console.log(e.latlng);
-      });
-    });
-  } else {
-    prompt("could not get your location");
-  }
-};
-
-// When type is changed in dropDown
-Container.addEventListener("click", (e) => {
-  if (e.target.classList.contains("dropdown")) {
-    const dropdown = document.querySelector(".dropdown");
-    const elvenGain = inputForm.querySelector(".elven-gain");
-    const cadence = inputForm.querySelector(".cadence");
-
-    if (dropdown.value === "cycling") {
-      elvenGain.classList.remove("hidden");
-      cadence.classList.add("hidden");
-    } else {
-      elvenGain.classList.add("hidden");
-      cadence.classList.remove("hidden");
-    }
-  }
-});
-
-const addMarker = function (lat, lng, desc) {
-  const marker = L.marker([lat, lng]).addTo(map);
-
-  const iconDesc = desc.includes("running")
-    ? `${desc.padStart(desc.length + 2, "🏃‍♂️")}`
-    : `${desc.padStart(desc.length + 2, "🚴‍♀️")}`;
-
-  marker.bindPopup(iconDesc).openPopup();
-};
-
-Container.addEventListener("keydown", (e) => {
+const handleInputEnter = (e) => {
   if (e.key === "Enter" && e.target.classList.contains("input-field")) {
     const type = document.querySelector(".dropdown");
 
-    let inputFields;
     // select inputFields based on the type
-    if (type.value === "running") {
-      inputFields = document.querySelectorAll(".input-field:not(.elven-input)");
-    } else {
-      inputFields = document.querySelectorAll(
-        ".input-field:not(.cadence-input)",
-      );
-    }
+    const inputFields = document.querySelectorAll(
+      type.value === "running"
+        ? ".input-field:not(.elven-input)"
+        : ".input-field:not(.cadence-input)",
+    );
 
     // To check if all the input values  are +ve
-    let state = [];
-    inputFields.forEach((field) => {
-      if (field.value >= 1) {
-        state.push(true);
-      } else {
-        state.push(false);
-      }
-    });
+    const isValidInput = Array.from(inputFields).every(
+      (field) => field.value >= 1,
+    );
 
-    console.log(state);
-    if (!state.includes(false)) {
+    if (isValidInput) {
       const [distance, duration, exercise] = inputFields;
       const date = new Date();
+      const desc = `${type.value} on ${date.toLocaleString("default", {
+        month: "long",
+        day: "numeric",
+      })}`;
+      workoutId = workouts.length + 1;
+
+      // add hidden classes
+      inputForm.classList.add("opacity-0", "h-0", "-translate-y-[97px]");
+      inputForm.classList.remove("mb-7", "py-6");
+
+      const { lat, lng } = latlng;
+
       makeWorkouts(
         date,
         type.value,
         distance.value,
         duration.value,
         exercise.value,
+        workoutId,
       );
 
-      // add hidden classes
-      inputForm.classList.add("opacity-0", "h-0", "-translate-y-[2rem]");
-      inputForm.classList.remove("mb-7", "py-6");
-
-      addMarker(workout.lat, workout.lng, "cycling on December2");
-      // details object
-      const typeProperty =
-        type.value === "running"
-          ? { cadence: exercise.value }
-          : { elvenGain: exercise.value };
+      addMarker(lat, lng, desc);
 
       const details = {
         type: type.value,
         distance: distance.value,
         duration: duration.value,
         date: new Date(),
-        corrdinates: [workout.lat, workout.lng],
+        coordinates: [lat, lng],
+        exercise: exercise.value,
+        id: `${workoutId}`,
+        description: desc,
       };
 
-      const allDetails = { ...typeProperty, ...details };
-
-      workouts.push(allDetails);
+      workouts.push(details);
       localStorage.setItem("workouts", JSON.stringify(workouts));
 
       // Empty all the input fields
       inputFields.forEach((field) => (field.value = ""));
     }
   }
-});
+};
 
-document.addEventListener("DOMContentLoaded", () => {
+const onDropDownChange = (e) => {
+  if (e.target.classList.contains("dropdown")) {
+    const dropdown = document.querySelector(".dropdown");
+    const elvenGain = inputForm.querySelector(".elven-gain");
+    const cadence = inputForm.querySelector(".cadence");
+
+    const isCycling = dropdown.value === "cycling";
+    elvenGain.classList.toggle("hidden", isCycling);
+    cadence.classList.toggle("hidden", !isCycling);
+  }
+};
+
+const onDomLoaded = () => {
   getLocation();
 
-  const workouts = JSON.parse(localStorage.getItem("workouts"));
-  console.log(workouts);
+  const workoutsLocalStorage = JSON.parse(localStorage.getItem("workouts"));
+  workouts.push(...workoutsLocalStorage);
+
   workouts.forEach((w) => {
     const dateString = w.date;
-    console.log(dateString);
     const date = new Date(dateString);
     const type = w.type;
     const distance = w.distance;
     const duration = w.duration;
-    const exercise = w.cadence;
-    const lat = w.lat;
-    const lng = w.lng;
+    const exercise = w.exercise;
+    const id = w.id;
 
-    console.log(lat);
-    makeWorkouts(
-      date,
-      type.value,
-      distance.value,
-      duration.value,
-      exercise.value,
+    makeWorkouts(date, type, distance, duration, exercise, id);
+  });
+};
+
+// This function will change the view
+const setView = (arr, e) => {
+  if (e.target.classList.contains("workout-details")) {
+    const target = arr.find(
+      (workout) => workout.id === e.target.parentElement.dataset.id,
     );
 
-    addMarker(lat, lng);
-  });
-});
+    const [lat, lng] = target.coordinates;
+    map.setView([lat, lng], 13);
+  }
+};
 
-// conflix between cadence exercise
+// EventListeners
+// When type is changed in dropDown
+Container.addEventListener("click", (e) => onDropDownChange(e));
+
+// when new workout is added
+Container.addEventListener("keydown", (e) => handleInputEnter(e));
+
+// on Domloaded
+document.addEventListener("DOMContentLoaded", () => onDomLoaded());
+
+workoutsContainer.addEventListener("click", (e) => {
+  setView(workouts, e);
+});

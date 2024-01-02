@@ -6,3 +6,12 @@ duration-opacity-transform {
   transition-property: opacity, transform;
   transition-duration: 0.5s, 1ms;
 }
+
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
