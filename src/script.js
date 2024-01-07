@@ -201,8 +201,9 @@ const onDomLoaded = () => {
   getLocation();
 
   const workoutsLocalStorage = JSON.parse(localStorage.getItem("workouts"));
-  workouts.push(...workoutsLocalStorage);
+  if (!workoutsLocalStorage) return;
 
+  workouts.push(...workoutsLocalStorage);
   workouts.forEach((w) => {
     const dateString = w.date;
     const date = new Date(dateString);
