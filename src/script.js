@@ -4,7 +4,6 @@ const workoutsContainer = document.querySelector(".workouts-container");
 let latlng;
 let map;
 let workouts = [];
-let workoutId;
 
 const onMapClick = function () {
   inputForm.classList.remove("opacity-0", "h-0", "-translate-y-[97px]");
@@ -27,40 +26,52 @@ const showError = (error) => {
 const addMarker = function (lat, lng, desc) {
   const marker = L.marker([lat, lng]).addTo(map);
 
-  const iconDesc = desc.includes("running")
-    ? `${desc.padStart(desc.length + 4, "🏃‍♂️  ")}`
-    : `${desc.padStart(desc.length + 4, "🚴‍♀️  ")}`;
+  marker
+    .bindPopup(
+      L.popup({
+        maxWidth: 250,
+        minWidth: 100,
+        autoClose: false,
+        className: " border-l-4 border-[#ffb545]",
+        closeOnClick: false,
+      }),
+    )
+    .setPopupContent(`${desc.includes("running") ? "🏃‍♂️" : "🚴‍♀️"} ${desc}`)
+    .openPopup();
+};
 
-  marker.bindPopup(iconDesc).openPopup();
+const loadMap = (coords) => {
+  // loading the map
+  // Setting the inital map based on user location
+  map = L.map("map").setView(coords, 13);
+
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution:
+      '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  }).addTo(map);
+
+  map.on("click", (e) => {
+    onMapClick(e);
+    latlng = e.latlng;
+  });
+
+  // For Dom Content Loaded
+  workouts.forEach((w) => {
+    const [lat, lng] = w.coordinates;
+    console.log(w);
+    addMarker(lat, lng, w.description);
+  });
 };
 
 const getLocation = () => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        let userLat = position.coords.latitude;
-        let userLon = position.coords.longitude;
+        let { latitude: lat, longitude: lng } = position.coords;
+        const coords = [lat, lng];
 
-        // Setting the inital map based on user location map
-        map = L.map("map").setView([userLat, userLon], 13);
-
-        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          maxZoom: 19,
-          attribution:
-            '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        }).addTo(map);
-
-        map.on("click", (e) => {
-          onMapClick(e);
-          latlng = e.latlng;
-          console.log(e.latlng);
-        });
-
-        // For Dom Content Loaded
-        workouts.forEach((w) => {
-          const [lat, lng] = w.coordinates;
-          addMarker(lat, lng, w.description);
-        });
+        loadMap(coords);
       },
       (error) => showError(error),
     );
@@ -146,7 +157,7 @@ const handleInputEnter = (e) => {
         month: "long",
         day: "numeric",
       })}`;
-      workoutId = workouts.length + 1;
+      workouts.length + 1;
 
       // add hidden classes
       inputForm.classList.add("opacity-0", "h-0", "-translate-y-[97px]");
@@ -160,7 +171,7 @@ const handleInputEnter = (e) => {
         distance.value,
         duration.value,
         exercise.value,
-        workoutId,
+        workouts.length + 1,
       );
 
       addMarker(lat, lng, desc);
@@ -172,7 +183,7 @@ const handleInputEnter = (e) => {
         date: new Date(),
         coordinates: [lat, lng],
         exercise: exercise.value,
-        id: `${workoutId}`,
+        id: workouts.length + 1,
         description: desc,
       };
 
@@ -191,7 +202,7 @@ const onDropDownChange = (e) => {
     const elvenGain = inputForm.querySelector(".elven-gain");
     const cadence = inputForm.querySelector(".cadence");
 
-    const isCycling = dropdown.value === "cycling";
+    const isCycling = dropdown.value === "running";
     elvenGain.classList.toggle("hidden", isCycling);
     cadence.classList.toggle("hidden", !isCycling);
   }
@@ -199,7 +210,6 @@ const onDropDownChange = (e) => {
 
 const onDomLoaded = () => {
   getLocation();
-
   const workoutsLocalStorage = JSON.parse(localStorage.getItem("workouts"));
   if (!workoutsLocalStorage) return;
 
